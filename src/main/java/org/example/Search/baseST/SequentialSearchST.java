@@ -1,4 +1,6 @@
-package org.example.Search;
+package org.example.Search.baseST;
+
+import org.example.Search.ST;
 
 import java.util.Iterator;
 

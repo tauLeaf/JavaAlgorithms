@@ -1,4 +1,4 @@
-package org.example.Search;
+package org.example.anotherAlg;
 
 public class BitonicSearch {
     public static void main(String[] args) {
@@ -10,23 +10,20 @@ public class BitonicSearch {
         int N = A.length;
 
         int low = 0;
-        int high = N-1;
+        int high = N - 1;
         int mid = 0, item;
         int index = 0;
-        while(low <= high) {
+        while (low <= high) {
             mid = (low + high) / 2;
             item = A[mid];
 
-            if(A[mid] < A[mid+1] && A[mid] > A[mid-1]) {
+            if (A[mid] < A[mid + 1] && A[mid] > A[mid - 1]) {
                 low = mid;
-            }
-            else if(A[mid] > A[mid+1] && A[mid] < A[mid-1]) {
+            } else if (A[mid] > A[mid + 1] && A[mid] < A[mid - 1]) {
                 high = mid;
-            }
-            else if(A[mid] > A[mid-1] && A[mid+1] > A[mid+2]) {
-                return mid-1;
-            }
-            else if(A[mid-1] > A[mid-2] && A[mid] > A[mid+1]) {
+            } else if (A[mid] > A[mid - 1] && A[mid + 1] > A[mid + 2]) {
+                return mid - 1;
+            } else if (A[mid - 1] > A[mid - 2] && A[mid] > A[mid + 1]) {
                 return mid;
             }
         }

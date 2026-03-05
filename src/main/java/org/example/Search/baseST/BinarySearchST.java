@@ -1,4 +1,6 @@
-package org.example.Search;
+package org.example.Search.baseST;
+
+import org.example.Search.ST;
 
 import java.util.Iterator;
 
@@ -6,7 +8,7 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> implements Itera
     private Key[] keys;
     private Value[] values;
     private int N;
-    private int i;
+    private int cache = 0;
 
     public BinarySearchST(int capacity) {
         keys = (Key[]) new Comparable[capacity];
@@ -21,12 +23,14 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> implements Itera
         int i = rank(key);
         if (i < N && keys[i].compareTo(key) == 0) {
             values[i] = val;
+            cache = i;
             return;
         }
         for (int j = N; j > i; j--) {
             keys[j] = keys[j - 1];
             values[j] = values[j - 1];
         }
+        cache = i;
         keys[i] = key;
         values[i] = val;
         N++;
@@ -34,9 +38,13 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> implements Itera
 
     public Value get(Key key) {
         if (isEmpty()) return null;
+
+        if (keys[cache].equals(key)) return values[cache];
         int i = rank(key);
-        if (i < N && keys[i].compareTo(key) == 0) return values[i];
-        else return null;
+        if (i < N && keys[i].compareTo(key) == 0) {
+            cache = i;
+            return values[i];
+        } else return null;
     }
 
     public int rank(Key key, int lo, int hi) {
